@@ -18,7 +18,8 @@ CREATE TABLE IF NOT EXISTS `ali_pay_transactions`(
   PRIMARY KEY (`id`),
   INDEX `ix_ali_pay_transactions_order_id` (`order_id` ASC),
   INDEX `ix_ali_pay_transactions_user_id` (`user_id` ASC),
-  INDEX `ix_ali_pay_transactions_payment_id` (`payment_id` ASC)
+  INDEX `ix_ali_pay_transactions_payment_id` (`payment_id` ASC),
+  INDEX `ix_ali_pay_transactions_request_status_trado_no` (`request_status`, `trade_no` ASC)
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;

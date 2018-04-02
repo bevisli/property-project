@@ -1,8 +1,5 @@
 package app.payment.ali.service.pay;
 
-import core.framework.impl.log.marker.ErrorCodeMarker;
-import core.framework.inject.Inject;
-import core.framework.util.Strings;
 import app.payment.ali.AliPayConfig;
 import app.payment.ali.domain.AliPayTransaction;
 import app.payment.ali.exception.AliPayException;
@@ -11,8 +8,11 @@ import app.payment.ali.service.SignatureService;
 import app.payment.ali.service.api.NotifyResponse;
 import app.payment.ali.service.api.TradeStatus;
 import app.payment.ali.service.pay.processor.AliPayNotifyProcessor;
-import app.payment.api.ali.pay.PayNotifyResponse;
+import app.payment.api.ali.pay.AliPayNotifyMessage;
 import app.payment.util.Converters;
+import core.framework.impl.log.marker.ErrorCodeMarker;
+import core.framework.inject.Inject;
+import core.framework.util.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +29,7 @@ public class PayNotifyService {
     @Inject
     SignatureService signatureService;
     @Inject
-    TransactionService transactionService;
+    PayTransactionService transactionService;
 
     public void process(Map<String, String> params) {
         StringBuilder paramBuilder = new StringBuilder();
@@ -38,7 +38,7 @@ public class PayNotifyService {
         if (signatureService.verifySignature(params)) {
             NotifyResponse notifyResponse = notifyResponse(params);
             verifyNotifyResponse(notifyResponse);
-            AliPayTransaction transaction = transactionService.updateAliPayTransaction(notifyResponse, "ALI_PAY_NOTIFY");
+            AliPayTransaction transaction = transactionService.updateAliPayTransaction(notifyResponse, "ali-pay-notify");
             processor.process(payNotify(transaction));
         } else {
             logger.warn(new ErrorCodeMarker(ErrorCodes.ALI_PAY_NOTIFY_VERIFY_SIGNATURE_FAILED), "failed to verified request signature");
@@ -86,8 +86,8 @@ public class PayNotifyService {
         }
     }
 
-    private PayNotifyResponse payNotify(AliPayTransaction transaction) {
-        PayNotifyResponse notify = new PayNotifyResponse();
+    private AliPayNotifyMessage payNotify(AliPayTransaction transaction) {
+        AliPayNotifyMessage notify = new AliPayNotifyMessage();
         notify.orderId = transaction.orderId;
         notify.paymentId = transaction.paymentId;
         notify.totalAmount = transaction.totalAmount;

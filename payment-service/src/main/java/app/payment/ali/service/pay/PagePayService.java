@@ -1,13 +1,5 @@
 package app.payment.ali.service.pay;
 
-import com.alipay.api.AlipayApiException;
-import com.alipay.api.AlipayClient;
-import com.alipay.api.AlipayResponse;
-import com.alipay.api.request.AlipayTradePagePayRequest;
-import core.framework.impl.log.marker.ErrorCodeMarker;
-import core.framework.inject.Inject;
-import core.framework.json.JSON;
-import core.framework.util.Strings;
 import app.payment.AliPayModule;
 import app.payment.ali.AliPayConfig;
 import app.payment.ali.domain.AliPayTransaction;
@@ -17,6 +9,14 @@ import app.payment.ali.service.api.PayContent;
 import app.payment.api.ali.pay.PagePayExecuteResponse;
 import app.payment.api.ali.pay.PagePayRedirectResponse;
 import app.payment.api.ali.pay.PagePayRequest;
+import com.alipay.api.AlipayApiException;
+import com.alipay.api.AlipayClient;
+import com.alipay.api.AlipayResponse;
+import com.alipay.api.request.AlipayTradePagePayRequest;
+import core.framework.impl.log.marker.ErrorCodeMarker;
+import core.framework.inject.Inject;
+import core.framework.json.JSON;
+import core.framework.util.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,13 +32,14 @@ public class PagePayService {
     @Inject
     AliErrorService errorService;
     @Inject
-    TransactionService transactionService;
+    PayTransactionService transactionService;
 
     public PagePayExecuteResponse executePayment(PagePayRequest request) {
         AliPayTransaction transaction = transactionService.addAliPayTransaction(request);
-        AlipayTradePagePayRequest payRequest = tradePagePayRequest(transaction.id, request);
         PagePayExecuteResponse response = new PagePayExecuteResponse();
+        response.transactionId = transaction.id;
         try {
+            AlipayTradePagePayRequest payRequest = tradePagePayRequest(transaction.id, request);
             AlipayResponse alipayResponse = alipayClient.pageExecute(payRequest);
             if (alipayResponse.isSuccess()) {
                 response.body = alipayResponse.getBody();
@@ -59,9 +60,10 @@ public class PagePayService {
 
     public PagePayRedirectResponse redirectPayment(PagePayRequest request) {
         AliPayTransaction transaction = transactionService.addAliPayTransaction(request);
-        AlipayTradePagePayRequest payRequest = tradePagePayRequest(transaction.id, request);
         PagePayRedirectResponse response = new PagePayRedirectResponse();
+        response.transactionId = transaction.id;
         try {
+            AlipayTradePagePayRequest payRequest = tradePagePayRequest(transaction.id, request);
             AlipayResponse alipayResponse = alipayClient.pageExecute(payRequest, "GET");
             if (alipayResponse.isSuccess()) {
                 response.redirectURL = alipayResponse.getBody();
@@ -85,12 +87,11 @@ public class PagePayService {
         payRequest.setReturnUrl(request.returnURL);
         payRequest.setNotifyUrl(notifyURL());
         PayContent content = new PayContent();
-        content.outTradeNo = request.paymentId;
+        content.outTradeNo = transactionId;
         content.productCode = "FAST_INSTANT_TRADE_PAY";
         content.totalAmount = request.amount.toString();
         content.subject = request.productName;
         content.body = request.description;
-        content.passBackParams = transactionId;
         if (!Strings.isEmpty(config.providerId)) {
             content.extendParams = new PayContent.ExtendParams();
             content.extendParams.serviceProviderId = config.providerId;

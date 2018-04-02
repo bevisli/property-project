@@ -11,4 +11,5 @@ public class AliPayConfig {
     public String sellerId;
     public String gateway;
     public String serviceHost;
+    public Boolean kafkaNotify;
 }
