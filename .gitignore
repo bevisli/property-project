@@ -1,1 +1,8 @@
-# Add any directories, files, or patterns you don't want to be tracked by version control
+.idea/
+/.gradle/
+/build/
+*.iml
+/classes/
+*/src/dev/java/
+.DS_Store
+node_modules/

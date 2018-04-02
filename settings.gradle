@@ -1,0 +1,6 @@
+include 'ali-cloud-service',
+        'payment-service-interface',
+        'payment-service',
+        'payment-service-db-migration',
+        'back-office-db-migration',
+        'back-office'

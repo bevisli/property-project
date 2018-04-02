@@ -1,0 +1,111 @@
+apply from: file("${rootDir}/gradle/project.gradle")
+
+subprojects {
+    group = 'core.framework.demo'
+    version = '1.0.0'
+
+    repositories {
+        maven {
+            url 'https://neowu.github.io/maven-repo/'
+        }
+    }
+}
+
+def coreNGVersion = '5.3.8'
+def kafkaVersion = '1.0.0'
+def mongoVersion = '3.5.0'
+def hsqlVersion = '2.4.0'
+def mysqlVersion = '6.0.6'
+def aliyunCoreVersion = '2.4.2'
+def aliyunSMSVersion = '3.0.0-rc1'
+def aliyunDYSMSVersion = '1.0.0'
+def aliyunOSSVersion = '2.3.0'
+def zxingVersion = '3.3.0'
+
+configure(subprojects.findAll { it.name.endsWith('-db-migration') }) {
+    apply from: file("${rootDir}/gradle/db-migration.gradle")
+
+    dependencies {
+        runtime "mysql:mysql-connector-java:${mysqlVersion}"
+    }
+}
+
+configure(subprojects.findAll { it.name.matches('.*-service-interface') }) {
+    dependencies {
+        compile "core.framework:core-ng-api:${coreNGVersion}"
+        testCompile "core.framework:core-ng-test:${coreNGVersion}"
+    }
+}
+
+// coreng
+configure([project(':payment-service'),
+           project(':back-office'),
+           project(':ali-cloud-service')]) {
+    apply from: file("${rootDir}/gradle/app.gradle")
+    dependencies {
+        compile "core.framework:core-ng:${coreNGVersion}"
+        testCompile "core.framework:core-ng-test:${coreNGVersion}"
+    }
+}
+
+// services use mysql
+configure([project(':payment-service'),
+           project(':back-office')]) {
+    apply from: file("${rootDir}/gradle/app.gradle")
+    dependencies {
+        runtime "mysql:mysql-connector-java:${mysqlVersion}"
+        testRuntime "org.hsqldb:hsqldb:${hsqlVersion}"
+    }
+}
+
+// services use mongo
+configure([project(':back-office')]) {
+    dependencies {
+        compile "org.mongodb:mongo-java-driver:${mongoVersion}"
+        testRuntime('com.github.fakemongo:fongo:2.1.0') {
+            // it has conflicted jackson lib version, exclude since we don't use geo
+            exclude group: 'de.grundid.opendatalab', module: 'geojson-jackson'
+        }
+    }
+}
+
+// services use kafka
+configure([project(':payment-service'),
+           project(':back-office')]) {
+    apply from: file("${rootDir}/gradle/app.gradle")
+    dependencies {
+        runtime "org.apache.kafka:kafka-clients:${kafkaVersion}"
+    }
+}
+
+project(':payment-service') {
+    apply from: file("${rootDir}/gradle/lib.gradle")
+    dependencies {
+        compile project(':ali-cloud-service')
+        compile project(':payment-service-interface')
+        compile "com.google.zxing:core:${zxingVersion}"
+        compile files("lib/alipay-sdk.jar")
+        compile files("lib/commons-logging-1.1.1.jar")
+        compile files("lib/wxpay-sdk-0.0.3.jar")
+        compile 'com.stripe:stripe-java:5.31.0'
+    }
+}
+
+project(':back-office') {
+    apply from: file("${rootDir}/gradle/frontend.gradle")
+    project.ext['frontendDir'] = "${rootDir}/back-office-webapp"
+
+    dependencies {
+
+    }
+}
+
+project(':ali-cloud-service') {
+    apply from: file("${rootDir}/gradle/lib.gradle")
+    dependencies {
+        compile "com.aliyun:aliyun-java-sdk-core:${aliyunCoreVersion}"
+        compile "com.aliyun:aliyun-java-sdk-sms:${aliyunSMSVersion}"
+        compile "com.aliyun.oss:aliyun-sdk-oss:${aliyunOSSVersion}"
+        compile "com.aliyun:aliyun-java-sdk-dysmsapi:${aliyunDYSMSVersion}"
+    }
+}
