@@ -5,9 +5,12 @@ import core.framework.api.json.Property;
 /**
  * @author mort
  */
-public class WXNativePayResponse {
+public class NativePayResponse {
     @Property(name = "prepay_id")
     public String prepayId;
+
+    @Property(name = "transaction_id")
+    public String transactionId;
 
     @Property(name = "code_url")
     public String codeURL;

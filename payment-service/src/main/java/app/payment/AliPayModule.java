@@ -12,7 +12,7 @@ import app.payment.ali.service.pay.processor.AliPayNotifyProcessor;
 import app.payment.ali.service.pay.processor.KafkaNotifyProcessor;
 import app.payment.ali.service.query.PayQueryService;
 import app.payment.ali.web.AliPayWebServiceImpl;
-import app.payment.ali.web.NotifyController;
+import app.payment.ali.web.PagePayNotifyController;
 import app.payment.api.AliPayWebService;
 import app.payment.api.ali.pay.AliPayNotifyMessage;
 import com.alipay.api.AlipayClient;
@@ -64,7 +64,7 @@ public class AliPayModule extends Module {
             bean(PayNotifyService.class).processor = bind(KafkaNotifyProcessor.class);
         }
 
-        route().post(ALI_PAY_NOTIFY_URL_PATH, bind(NotifyController.class)::notify);
+        route().post(ALI_PAY_NOTIFY_URL_PATH, bind(PagePayNotifyController.class)::notify);
         schedule().fixedRate("sync-ali-payments-job", bind(SyncPaymentsJob.class), Duration.ofHours(1));
         api().service(AliPayWebService.class, bind(AliPayWebServiceImpl.class));
     }

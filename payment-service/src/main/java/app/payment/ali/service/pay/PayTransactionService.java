@@ -39,7 +39,7 @@ public class PayTransactionService {
 
     AliPayTransaction addAliPayTransaction(PagePayRequest payRequest) {
         AliPayTransaction transaction = new AliPayTransaction();
-        transaction.id = UUID.randomUUID().toString();
+        transaction.id = UUID.randomUUID().toString().replace("-", "");
         transaction.orderId = payRequest.orderId;
         transaction.paymentId = payRequest.paymentId;
         transaction.userId = payRequest.userId;

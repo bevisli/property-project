@@ -41,6 +41,11 @@ public class WXPayTransaction {
     @Column(name = "prepay_id")
     public String prepayId;
 
+    @NotNull
+    @NotEmpty
+    @Column(name = "request_status")
+    public String requestStatus;
+
     @NotEmpty
     @Length(max = 100)
     @Column(name = "transaction_id")

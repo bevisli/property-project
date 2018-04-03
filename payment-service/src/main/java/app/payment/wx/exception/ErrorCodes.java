@@ -10,4 +10,5 @@ public class ErrorCodes {
     public static final String WX_PAY_XML_TO_MAP_FAILED = "WX_PAY_XML_TO_MAP_FAILED";
     public static final String WX_VERIFY_SIGNATURE_FAILED = "WX_VERIFY_SIGNATURE_FAILED";
     public static final String WX_QUERY_ORDER_FAILED = "WX_QUERY_ORDER_FAILED";
+    public static final String WX_PAY_NOTIFY_VERIFY_SIGNATURE_FAILED = "WX_PAY_NOTIFY_VERIFY_SIGNATURE_FAILED";
 }

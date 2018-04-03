@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * @author mort
  */
-public class WXPayNotificationResponse extends BaseResponse {
+public class NotifyResponse extends BaseResponse {
     public String appId;
     public String merchantId;
     public String openId;
@@ -24,8 +24,8 @@ public class WXPayNotificationResponse extends BaseResponse {
     public String attachParam;
     public LocalDateTime timeEnd;
 
-    public static WXPayNotificationResponse fromMap(Map<String, String> params) {
-        WXPayNotificationResponse notification = new WXPayNotificationResponse();
+    public static NotifyResponse fromMap(Map<String, String> params) {
+        NotifyResponse notification = new NotifyResponse();
         notification.returnCode = params.get(APIConstants.PARAM_RETURN_CODE);
         notification.returnMessage = params.get(APIConstants.PARAM_RETURN_MSG);
         if (notification.returnOK()) {

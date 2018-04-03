@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * @author mort
  */
-public class WXQueryPaymentResponse extends BaseResponse {
+public class PaymentQueryResponse extends BaseResponse {
     public String appId;
     public String merchantId;
 
@@ -24,8 +24,8 @@ public class WXQueryPaymentResponse extends BaseResponse {
     public String feeType;
     public LocalDateTime timeEnd;
 
-    public static WXQueryPaymentResponse fromMap(Map<String, String> params) {
-        WXQueryPaymentResponse response = new WXQueryPaymentResponse();
+    public static PaymentQueryResponse fromMap(Map<String, String> params) {
+        PaymentQueryResponse response = new PaymentQueryResponse();
         response.returnCode = params.get(APIConstants.PARAM_RETURN_CODE);
         response.returnMessage = params.get(APIConstants.PARAM_RETURN_MSG);
         if (response.returnOK()) {

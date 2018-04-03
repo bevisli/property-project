@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS `wx_pay_transactions`(
   `payment_id` VARCHAR(50) NOT NULL,
   `user_id` VARCHAR(50) NOT NULL,
   `prepay_id` VARCHAR(100) NULL,
+  `request_status` VARCHAR(50) NOT NULL,
   `transaction_id` VARCHAR(100) NULL,
   `total_amount` NUMERIC(11,2) NOT NULL,
   `open_id` VARCHAR(150) NULL,
@@ -22,7 +23,8 @@ CREATE TABLE IF NOT EXISTS `wx_pay_transactions`(
   PRIMARY KEY (`id`),
   INDEX `ix_wx_pay_transactions_order_id` (`order_id` ASC),
   INDEX `ix_wx_pay_transactions_user_id` (`user_id` ASC),
-  INDEX `ix_wx_pay_transactions_payment_id` (`payment_id` ASC)
+  INDEX `ix_wx_pay_transactions_payment_id` (`payment_id` ASC),
+  INDEX `ix_wx_pay_transactions_request_status_transaction_id` (`request_status`, `transaction_id` ASC)
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;

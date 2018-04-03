@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * @author mort
  */
-public class NotifyController {
+public class PagePayNotifyController {
     @Inject
     PayNotifyService notificationService;
 

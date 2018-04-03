@@ -10,7 +10,7 @@ import core.framework.web.Request;
 import core.framework.web.Response;
 import app.payment.wx.exception.ErrorCodes;
 import app.payment.wx.exception.WXPayException;
-import app.payment.wx.service.pay.WXPayNotificationService;
+import app.payment.wx.service.pay.PayNotifyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,10 +19,10 @@ import java.util.Map;
 /**
  * @author mort
  */
-public class WXNativePayNotifyController {
-    private final Logger logger = LoggerFactory.getLogger(WXNativePayNotifyController.class);
+public class NativePayNotifyController {
+    private final Logger logger = LoggerFactory.getLogger(NativePayNotifyController.class);
     @Inject
-    WXPayNotificationService notificationService;
+    PayNotifyService notificationService;
 
     public Response notify(Request request) {
         if (!request.body().isPresent()) {

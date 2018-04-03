@@ -27,6 +27,7 @@ public class WXPayConfigImpl implements WXPayConfig {
     public WXPayConstants.SignType signType;
     public String certPath;
     public String ossImageBucket;
+    public Boolean kafkaNotify;
     private byte[] certBytes;
 
     @Override

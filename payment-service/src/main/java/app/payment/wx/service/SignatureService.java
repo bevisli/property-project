@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * @author mort
  */
-public class WXSignatureService {
+public class SignatureService {
     @Inject
     WXPayConfigImpl config;
 
