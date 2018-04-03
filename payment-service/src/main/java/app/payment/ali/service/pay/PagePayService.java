@@ -4,7 +4,7 @@ import app.payment.AliPayModule;
 import app.payment.ali.AliPayConfig;
 import app.payment.ali.domain.AliPayTransaction;
 import app.payment.ali.exception.ErrorCodes;
-import app.payment.ali.service.AliErrorService;
+import app.payment.ali.service.ErrorService;
 import app.payment.ali.service.api.PayContent;
 import app.payment.api.ali.pay.PagePayExecuteResponse;
 import app.payment.api.ali.pay.PagePayRedirectResponse;
@@ -30,7 +30,7 @@ public class PagePayService {
     @Inject
     AlipayClient alipayClient;
     @Inject
-    AliErrorService errorService;
+    ErrorService errorService;
     @Inject
     PayTransactionService transactionService;
 

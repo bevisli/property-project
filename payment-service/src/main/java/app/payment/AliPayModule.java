@@ -2,7 +2,7 @@ package app.payment;
 
 import app.payment.ali.AliPayConfig;
 import app.payment.ali.domain.AliPayTransaction;
-import app.payment.ali.service.AliErrorService;
+import app.payment.ali.service.ErrorService;
 import app.payment.ali.service.SignatureService;
 import app.payment.ali.service.job.SyncPaymentsJob;
 import app.payment.ali.service.pay.PagePayService;
@@ -54,7 +54,7 @@ public class AliPayModule extends Module {
         bind(AlipayClient.class, alipayClient);
 
         bind(SignatureService.class);
-        bind(AliErrorService.class);
+        bind(ErrorService.class);
         bind(PayQueryService.class);
         bind(PayTransactionService.class);
         bind(PagePayService.class);

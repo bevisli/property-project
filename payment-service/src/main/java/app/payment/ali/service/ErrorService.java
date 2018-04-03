@@ -7,7 +7,7 @@ import app.payment.api.ali.ErrorView;
 /**
  * @author mort
  */
-public class AliErrorService {
+public class ErrorService {
     public ErrorView resultError(AlipayResponse alipayResponse, String message) {
         ErrorView view = new ErrorView();
         view.errorCode = alipayResponse.getCode();
