@@ -16,7 +16,7 @@ angular.module('app')
         $stateProvider
             .state('app', {
                 abstract: true,
-                templateUrl: '/template/views/common/layouts/full.html',
+                templateUrl: 'views/common/layouts/full.html',
                 //page title goes here
                 ncyBreadcrumb: {
                     label: 'Root',
@@ -28,18 +28,16 @@ angular.module('app')
                         return $ocLazyLoad.load([{
                             serie: true,
                             name: 'Font Awesome',
-                            files: ['/static/vendors/css/font-awesome.min.css']
+                            files: ['node_modules/font-awesome/css/font-awesome.min.css']
                         }, {
                             serie: true,
                             name: 'Simple Line Icons',
-                            files: ['/static/vendors/css/simple-line-icons.min.css']
+                            files: ['node_modules/simple-line-icons/css/simple-line-icons.css']
                         }, {
                             serie: true,
                             name: 'ngDialog',
-                            files: ['/static/vendors/css/ngDialog.min.css',
-                                '/static/vendors/css/ngDialog-theme-default.min.css',
-                                '/static/vendors/css/ngDialog-theme-plain.min.css',
-                                '/static/vendors/css/ngDialog-custom-width.css']
+                            files: ['node_modules/ng-dialog/css/ngDialog.min.css',
+                                'node_modules/ng-dialog/css/ngDialog-theme-default.min.css']
                         }]);
                     }],
                     loadPlugin: ['$ocLazyLoad', function ($ocLazyLoad) {
@@ -48,8 +46,8 @@ angular.module('app')
                             serie: true,
                             name: 'chart.js',
                             files: [
-                                '/static/vendors/js/Chart.min.js',
-                                '/static/vendors/js/angular-chart.min.js'
+                                'node_modules/chart.js/dist/Chart.min.js',
+                                'node_modules/angular-chart.js/dist/angular-chart.min.js'
                             ]
                         }]);
                     }],
@@ -57,7 +55,7 @@ angular.module('app')
             })
             .state('app.main', {
                 url: '/dashboard',
-                templateUrl: '/template/views/main.html',
+                templateUrl: 'views/main.html',
                 //page title goes here
                 ncyBreadcrumb: {
                     label: 'Home'
@@ -72,8 +70,8 @@ angular.module('app')
                                 serie: true,
                                 name: 'chart.js',
                                 files: [
-                                    '/static/vendors/js/Chart.min.js',
-                                    '/static/vendors/js/angular-chart.min.js'
+                                    'node_modules/chart.js/dist/Chart.min.js',
+                                    'node_modules/angular-chart.js/dist/angular-chart.min.js'
                                 ]
                             },
                         ]);
@@ -81,7 +79,7 @@ angular.module('app')
                     loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
                         // you can lazy load controllers
                         return $ocLazyLoad.load({
-                            files: ['/static/js/controllers/dashboard/main.js']
+                            files: ['static/js/controllers/dashboard/main.js']
                         });
                     }]
                 }
@@ -142,7 +140,7 @@ angular.module('app')
             })
             .state('app.admin.user.search', {
                 url: "/search",
-                templateUrl: '/template/views/user/search.html',
+                templateUrl: 'views/user/search.html',
                 controller: 'UserSearchController',
                 ncyBreadcrumb: {
                     label: 'Search'
@@ -151,14 +149,14 @@ angular.module('app')
                     loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
                         // you can lazy load controllers
                         return $ocLazyLoad.load({
-                            files: ['/static/js/controllers/user/search.js']
+                            files: ['static/js/controllers/user/search.js']
                         });
                     }]
                 }
             })
             .state('app.admin.user.update', {
                 url: "/update",
-                templateUrl: '/template/views/user/update.html',
+                templateUrl: 'views/user/update.html',
                 controller: 'UserUpdateController',
                 ncyBreadcrumb: {
                     label: 'Update'
@@ -167,7 +165,7 @@ angular.module('app')
                     loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
                         // you can lazy load controllers
                         return $ocLazyLoad.load({
-                            files: ['/static/js/controllers/user/update.js']
+                            files: ['static/js/controllers/user/update.js']
                         });
                     }]
                 }
@@ -182,25 +180,25 @@ angular.module('app')
             })
             .state('app.admin.role.search', {
                 url: "/search",
-                template: '/template/views/user/role.list.html',
+                template: 'views/user/role.list.html',
                 ncyBreadcrumb: {
                     label: 'Search'
                 }
             })
             .state('appSimple', {
                 abstract: true,
-                templateUrl: '/template/views/common/layouts/simple.html',
+                templateUrl: 'views/common/layouts/simple.html',
                 resolve: {
                     loadCSS: ['$ocLazyLoad', function ($ocLazyLoad) {
                         // you can lazy load CSS files
                         return $ocLazyLoad.load([{
                             serie: true,
                             name: 'Font Awesome',
-                            files: ['/static/vendors/css/font-awesome.min.css']
+                            files: ['node_modules/font-awesome/css/font-awesome.min.css']
                         }, {
                             serie: true,
                             name: 'Simple Line Icons',
-                            files: ['/static/vendors/css/simple-line-icons.min.css']
+                            files: ['node_modules/simple-line-icons/css/simple-line-icons.css']
                         }]);
                     }],
                 }
@@ -208,14 +206,14 @@ angular.module('app')
             // Additional Pages
             .state('appSimple.login', {
                 url: '/login',
-                templateUrl: '/template/login.html'
+                templateUrl: 'views/login.html'
             })
             .state('appSimple.404', {
                 url: '/404',
-                templateUrl: '/template/404.html'
+                templateUrl: 'views/404.html'
             })
             .state('appSimple.500', {
                 url: '/500',
-                templateUrl: '/template/500.html'
+                templateUrl: 'views/500.html'
             })
     }]);

@@ -5,7 +5,7 @@
             dialog.show({
                     id: "demo-dialog",
                     scope: $scope,
-                    templateURL: "/template/views/demo/dialog-in.html",
+                    templateURL: "/views/demo/dialog-in.html",
                     controller: "DemoDialogInController",
                     data: {
                         data1: "value1"

@@ -39,7 +39,7 @@
     "node_modules/angular-file-upload/dist/angular-file-upload.min.js.map",
     "node_modules/angular-messages/angular-messages.min.js",
     "node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js",
-    "node_modules/angular-dialog/js/ngDialog.min.js",
-    "node_modules/angular-toast/dist/ngToast.min.js"
+    "node_modules/ng-dialog/js/ngDialog.min.js",
+    "node_modules/ng-toast/dist/ngToast.min.js"
   ]
 }
