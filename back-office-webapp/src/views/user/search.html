@@ -1,0 +1,67 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header title-with-new">
+                    <a title="新增用户" ui-sref="app.admin.user.update">
+                        <i class="fa fa-align-justify"></i> 用户
+                        <i class="pull-right fa fa-plus fa-lg mt-1"></i>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div class="search-form">
+                        <div class="controls">
+                            <label class="col-form-label" for="filterSelect">查询</label>
+                            <div class="input-group col-md-9">
+                                <div class="col-md-3">
+                                    <select id="filterSelect" name="filterSelect" class="form-control input-lg" size="1"
+                                            ng-options="filter as filter.name for filter in filters track by filter.code"
+                                            ng-model="selectedFilter" ng-change="filterChanged()">
+                                    </select>
+                                </div>
+                                <input id="appendedInputButtons" size="6" class="form-control" type="text"
+                                       placeholder="{{selectedFilter.desc}}" ng-model="query.filter.value"
+                                       ng-enter="search()">
+                                <span class="input-group-append">
+                                    <button class="btn btn-primary" type="button" ng-click="search()">Search</button>
+                                    <button class="btn btn-secondary" type="button" ng-click="clear()">Clear</button>
+                                  </span>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>用户名</th>
+                            <th>电话号码</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="user in userResponse.users">
+                            <td>{{user.name}}</td>
+                            <td>{{user.phone_number}}</td>
+                            <td>{{user.status}}</td>
+                            <td>
+                                <a title="update user" ui-sref="app.admin.user.update({id:'{{user.id}}'})"
+                                   href="javascript:void(0);">修改</a>
+                                <a title="disable user" href="javascript:void(0);" ng-click="disable(user.id)"
+                                   ng-if="user.status == 'ACTIVE'" ui>禁用</a>
+                                <a title="activate user" href="javascript:void(0);" ng-click="activate(user.id)"
+                                   ng-if="user.status != 'ACTIVE'" ui>激活</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="pull-right mt-3 mr-3">
+                        <ul uib-pagination total-items="pagination.total" ng-model="pagination.currentPage"
+                            max-size="pagination.maxSize" ng-change="pagination.pageChanged()"
+                            items-per-page="pagination.pageSize" class="pagination-sm"
+                            boundary-link-numbers="true"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

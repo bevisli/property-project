@@ -1,0 +1,25 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong>File Upload</strong>
+                    <small> Demo</small>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Banner(1440Wx1024H)</label>
+                        <button type="button" class="btn btn-sm btn-primary" ng-file-select
+                                ng-file-change="upload($files)">
+                            <i class="fa fa-upload fa-lg "> select..</i>
+                        </button>
+                    </div>
+                    <div>
+                        <label>image key: {{imageKey}}</label>
+                        <img ng-src="{{imagePreviewURL}}" max-width="1440px" max-height="1024px" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

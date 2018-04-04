@@ -1,0 +1,36 @@
+<div class="page" flex>
+    <md-content layout="row" flex>
+        <md-card flex>
+            <md-content layout-padding>
+                <div class="md-toolbar-tools">Role</div>
+                <form name="roleForm" class="form-horizontal" novalidate layout="row">
+                    <div layout="column" flex>
+                        <md-input-container class=" md-long-text" >
+                            <label flex="20">Role Code:</label>
+                            <div class="md-list-item-text" flex="70">
+                                <input name="code" ng-model="role.code" ng-maxlength="50"  ng-disabled="isUpdate" required>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class=" md-long-text">
+                            <label flex="20">Role Name:</label>
+                            <div class="md-list-item-text" flex="70">
+                                <input name="name" ng-model="role.name" ng-maxlength="50" >
+                            </div>
+                        </md-input-container>
+                        <div>
+                            <md-button type="submit" ng-disabled="roleForm.$invalid" ng-if="isUpdate"
+                                       class="md-raised md-primary"
+                                       ng-click="updateRole()">update
+                            </md-button>
+                            <md-button type="submit" ng-disabled="roleForm.$invalid" ng-if="!isUpdate"
+                                       class="md-raised md-primary"
+                                       ng-click="createRole()">Add
+                            </md-button>
+                        </div>
+                    </div>
+                </form>
+            </md-content>
+        </md-card>
+    </md-content>
+
+</div>

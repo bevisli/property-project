@@ -1,0 +1,51 @@
+<!-- Navbar -->
+<div ng-include="'/template/views/common/navbar.html'" include-replace></div>
+<div class="app-body">
+    <!-- Navigation -->
+    <div ng-include="'/template/views/common/sidebar-nav.html'" include-replace></div>
+    <!-- Main content -->
+    <main class="main">
+        <!-- Breadcrumb -->
+        <ol class="breadcrumb" breadcrumb>
+            <ncy-breadcrumb></ncy-breadcrumb>
+
+            <!-- Breadcrumb Menu-->
+            <li class="breadcrumb-menu">
+                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                    <a class="btn" href="#"><i class="icon-speech"></i></a>
+                    <a class="btn" ui-sref="app.main"><i class="icon-graph"></i> &nbsp;Dashboard</a>
+                    <a class="btn" ui-sref="app.main"><i class="icon-settings"></i> &nbsp;Settings</a>
+                </div>
+            </li>
+
+        </ol>
+        <div class="container-fluid">
+            <ui-view>
+            </ui-view>
+        </div>
+        <!-- /.conainer-fluid -->
+    </main>
+
+    <!-- Aside Menu -->
+    <div ng-include="'/template/views/common/aside.html'" include-replace></div>
+</div>
+
+<!-- Footer -->
+<div ng-include="'/template/views/common/footer.html'" include-replace></div>
+<script type="text/ng-template" id="globalConfirmDialog">
+    <div class="card">
+        <div class="card-header">
+            {{ngDialogData.title}}
+        </div>
+        <div class="card-body">
+            <div>
+                {{ngDialogData.content}}
+            </div>
+            <div class="form-group form-actions">
+                <button type="button" class="btn btn-sm btn-success" ng-click="confirm()">Confirm
+                </button>
+                <button class="btn btn-secondary" type="button" ng-click="closeThisDialog(0)">Cancel</button>
+            </div>
+        </div>
+    </div>
+</script>

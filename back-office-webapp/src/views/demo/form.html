@@ -1,0 +1,61 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Form</strong>
+                    <small>Demo</small>
+                </div>
+                <form name="userForm">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="userName">用户名 *</label>
+                            <input name="userName" id="userName" type="text" class="form-control" placeholder="输入用户名"
+                                   ng-model="user.name" ng-minlength="3" ng-maxlength="50"
+                                   ng-disabled="isUpdate" ng-required="!isUpdate">
+                            <div class="validation-message" ng-messages="userForm.userName.$error"
+                                 ng-if="userForm.userName.$dirty">
+                                <div ng-message="required">This field is required</div>
+                                <div ng-message="minlength">Must be over 3 characters</div>
+                                <div ng-message="maxlength">Must not exceed 50 characters</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNumber">电话号码 *</label>
+                            <input name="phoneNumber" type="number" class="form-control" id="phoneNumber"
+                                   placeholder="输入电话号码"
+                                   ng-model="user.phone_number" ng-minlength="10" ng-maxlength="11"
+                                   ng-required="!isUpdate">
+                            <div class="validation-message" ng-messages="userForm.phoneNumber.$error"
+                                 ng-if="userForm.phoneNumber.$dirty">
+                                <div ng-message="required">This field is required</div>
+                                <div ng-message="minlength">Must be a valid phone number</div>
+                                <div ng-message="maxlength">Must be a valid phone number</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">初始密码 *</label>
+                            <input name="password" id="password" type="text" class="form-control" placeholder="输入密码"
+                                   ng-model="user.password" ng-minlength="6" ng-maxlength="50"
+                                   ng-required="!isUpdate">
+                            <div class="validation-message" ng-messages="userForm.password.$error"
+                                 ng-if="userForm.password.$dirty">
+                                <div ng-message="required">This field is required</div>
+                                <div ng-message="minlength">Must be over 6 characters</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-sm btn-success" ng-disabled="userForm.$invalid"
+                                ng-click="submit();">
+                            <i class="fa fa-dot-circle-o"></i> Submit
+                        </button>
+                        <button type="button" class="btn btn-sm btn-danger" ng-click="clear()">
+                            <i class="fa fa-ban"></i> Clear
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

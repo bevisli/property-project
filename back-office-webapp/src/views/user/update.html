@@ -1,0 +1,84 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong>用户</strong>
+                    <small>信息</small>
+                </div>
+                <form name="userForm">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="userName">用户名 *</label>
+                            <input name="userName" id="userName" type="text" class="form-control" placeholder="输入用户名"
+                                   ng-model="userResponse.user.name" ng-minlength="3" ng-maxlength="50"
+                                   ng-disabled="isUpdate" ng-required="!isUpdate">
+                            <div class="validation-message" ng-messages="userForm.userName.$error"
+                                 ng-if="userForm.userName.$dirty">
+                                <div ng-message="required">This field is required</div>
+                                <div ng-message="minlength">Must be over 3 characters</div>
+                                <div ng-message="maxlength">Must not exceed 50 characters</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNumber">电话号码 *</label>
+                            <input name="phoneNumber" type="number" class="form-control" id="phoneNumber"
+                                   placeholder="输入电话号码"
+                                   ng-model="userResponse.user.phone_number" ng-minlength="10" ng-maxlength="11"
+                                   ng-required="!isUpdate">
+                            <div class="validation-message" ng-messages="userForm.phoneNumber.$error"
+                                 ng-if="userForm.phoneNumber.$dirty">
+                                <div ng-message="required">This field is required</div>
+                                <div ng-message="minlength">Must be a valid phone number</div>
+                                <div ng-message="maxlength">Must be a valid phone number</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">初始密码 *</label>
+                            <input name="password" id="password" type="text" class="form-control" placeholder="输入密码"
+                                   ng-model="userResponse.user.password" ng-minlength="6" ng-maxlength="50"
+                                   ng-required="!isUpdate">
+                            <div class="validation-message" ng-messages="userForm.password.$error"
+                                 ng-if="userForm.password.$dirty">
+                                <div ng-message="required">This field is required</div>
+                                <div ng-message="minlength">Must be over 6 characters</div>
+                            </div>
+                        </div>
+
+                        <div class="mt-5">
+                            <label for="roles">角色权限</label>
+                            <table class="table table-striped" id="roles">
+                                <thead>
+                                <tr>
+                                    <th>Code</th>
+                                    <th>角色名称</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="role in userResponse.roles">
+                                    <td>{{role.code}}</td>
+                                    <td>{{role.name}}</td>
+                                    <td>
+                                        <a title="add role" href="javascript:void(0);" ng-click="removeRole(role.code)"
+                                           ng-if="role.has_role">Delete</a>
+                                        <a title="subtract role" href="javascript:void(0);"
+                                           ng-click="addRole(role.code)" ng-if="!role.has_role">Add</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-sm btn-success" ng-disabled="userForm.$invalid"
+                                ng-click="showMessage();">
+                            <i class="fa fa-dot-circle-o"></i> Submit
+                        </button>
+                        <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

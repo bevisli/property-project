@@ -1,0 +1,83 @@
+<div class="sidebar">
+    <nav class="sidebar-nav">
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" ui-sref-active="active" ui-sref="app.main"><i class="icon-speedometer"></i>
+                    Dashboard </a>
+            </li>
+
+            <li class="divider"></li>
+            <li class="nav-title">
+                OPERATION
+            </li>
+
+            <li class="nav-item nav-dropdown" ng-class="{open: $state.includes('app.csr')}">
+                <a class="nav-link nav-dropdown-toggle" ng-class="{active: $state.includes('app.csr')}"
+                   href="#"><i class="icon-earphones-alt"></i>Customer Service</a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.csr.customer.search">
+                            <label> - Customers</label>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.csr.order.search">
+                            <label> - Orders</label>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item nav-dropdown" ng-class="{open: $state.includes('app.admin')}">
+                <a class="nav-link nav-dropdown-toggle" ng-class="{active: $state.includes('app.admin')}" href="#"><i
+                        class="icon-shield"></i>Admin</a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.admin.user.search">
+                            <label> - Users</label>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.admin.role.search">
+                            <label> - Roles</label>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="divider"></li>
+            <li class="nav-title">
+                Demo
+            </li>
+            <li class="nav-item nav-dropdown" ng-class="{open: $state.includes('app.demo')}">
+                <a class="nav-link nav-dropdown-toggle" ng-class="{active: $state.includes('app.demo')}" href="#"><i
+                        class="icon-notebook"></i>Demo</a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.demo.file">
+                            <label> - File</label>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.demo.dialog">
+                            <label> - Dialog</label>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.demo.notify">
+                            <label> - Notify</label>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.demo.form">
+                            <label> - Form</label>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.demo.pagination">
+                            <label> - Pagination</label>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</div>

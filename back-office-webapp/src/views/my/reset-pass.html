@@ -1,0 +1,48 @@
+<md-toolbar class="md-accent header">
+    <div class="md-toolbar-tools" layout="row">
+        <h2 class="md-toolbar-item breadcrumb md-headline" flex><a ui-sref="admin.category.list">密码设置</a></h2>
+        <div class="md-toolbar-item">
+            <a title="new store" ui-sref="admin.category.create" ui><i class="material-icons"></i></a>
+        </div>
+    </div>
+</md-toolbar>
+<div class="page" flex>
+    <md-content layout="row" flex>
+        <md-card flex>
+            <md-content layout-padding>
+                <div class="md-toolbar-tools">重置密码</div>
+                <form name="userForm" class="form-horizontal" novalidate layout="row">
+                    <div layout="column" flex>
+                        <md-input-container class="md-long-text">
+                            <label flex="20">旧密码：</label>
+                            <div class="md-list-item-text" flex="70">
+                                <input name="old_password" type="password" ng-model="user.old_password"
+                                       ng-maxlength="50">
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-long-text">
+                            <label flex="20">新密码：</label>
+                            <div class="md-list-item-text" flex="70">
+                                <input name="password" type="password" ng-model="user.password"
+                                       ng-maxlength="50">
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-long-text">
+                            <label flex="20">新密码确认：</label>
+                            <div class="md-list-item-text" flex="70">
+                                <input name="password_confirm" type="password" ng-model="user.password_confirm"
+                                       ng-maxlength="50">
+                            </div>
+                        </md-input-container>
+                        <div>
+                            <md-button type="submit" ng-disabled="userForm.$invalid"
+                                       class="md-raised md-primary"
+                                       ng-click="resetPassword()">确认
+                            </md-button>
+                        </div>
+                    </div>
+                </form>
+            </md-content>
+        </md-card>
+    </md-content>
+</div>
