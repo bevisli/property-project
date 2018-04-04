@@ -37,7 +37,8 @@ angular.module('app')
                             serie: true,
                             name: 'ngDialog',
                             files: ['node_modules/ng-dialog/css/ngDialog.min.css',
-                                'node_modules/ng-dialog/css/ngDialog-theme-default.min.css']
+                                'node_modules/ng-dialog/css/ngDialog-theme-default.min.css',
+                                'node_modules/ng-toast/dist/ngToast.min.css']
                         }]);
                     }],
                     loadPlugin: ['$ocLazyLoad', function ($ocLazyLoad) {

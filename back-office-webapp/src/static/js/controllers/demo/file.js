@@ -1,10 +1,10 @@
 (function (angular) {
     var module = angular.module('app');
-    module.controller('DemoFileUploadController', ['$scope', '$upload', function ($scope, $upload) {
+    module.controller('DemoFileUploadController', ['$scope', 'Upload', function ($scope, Upload) {
         $scope.upload = function (files) {
             if (files && files.length > 0) {
                 var file = files[0];
-                $upload.upload({
+                Upload.upload({
                     url: '/file/example-uploader',
                     file: file
                 }).progress(function (evt) {
