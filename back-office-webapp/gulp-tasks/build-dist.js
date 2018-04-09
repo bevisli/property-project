@@ -74,11 +74,11 @@ gulp.task('replace:node_modules', function () {
         paths.dist.root + '**/*.js'
     ], {base: './'})
         .pipe(replace(/node_modules+.+(\/[a-z0-9][^/]*\.js+(\'|\"))/ig, 'vendors/js$1'))
-        .pipe(replace(/vendors\/js\/(.*).js/ig, 'static/vendors/js/$1.min.js'))
+        .pipe(replace(/vendors\/js\/(.*).js/ig, '/static/vendors/js/$1.min.js'))
         .pipe(replace(/..\/..\/vendors\/js\/(.*).js/ig, '../../static/vendors/js/$1.min.js'))
         .pipe(replace('.min.min.js', '.min.js'))
         .pipe(replace(/node_modules+.+(\/[a-z0-9][^/]*\.css+(\'|\"))/ig, 'vendors/css$1'))
-        .pipe(replace(/vendors\/css\/(.*).css/ig, 'static/vendors/css/$1.min.css'))
+        .pipe(replace(/vendors\/css\/(.*).css/ig, '/static/vendors/css/$1.min.css'))
         .pipe(replace(/..\/..\/vendors\/css\/(.*).css/ig, '../../static/vendors/css/$1.min.css'))
         .pipe(replace('.min.min.css', '.min.css'))
         .pipe(gulp.dest('./'));

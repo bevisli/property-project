@@ -18,7 +18,7 @@ public class LoginController {
     AuthorizationService authorizationService;
 
     public Response login(Request request) {
-        return Response.html("/template/views/pages/login.html", new EmptyPageModel());
+        return Response.html("/views/pages/login.html", new EmptyPageModel());
     }
 
     public Response submit(Request request) {

@@ -13,6 +13,6 @@ public class HomeController {
     public Response home(Request request) {
 //        LoginUser loginUser = Sessions.currentUser(request);
 
-        return Response.html("/template/index.html", new EmptyPageModel());
+        return Response.html("/index.html", new EmptyPageModel());
     }
 }

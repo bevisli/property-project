@@ -13,6 +13,7 @@ public class SiteModule extends Module {
     protected void initialize() {
         site().session().cookie("BOSessionId", null);
         site().staticContent("/");
+        site().staticContent("/views");
         site().staticContent("/static");
 
         site().template("/index.html", EmptyPageModel.class);

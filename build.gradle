@@ -96,7 +96,8 @@ project(':back-office') {
     project.ext['frontendDir'] = "${rootDir}/back-office-webapp"
 
     dependencies {
-
+        compile project(':ali-cloud-service')
+        compile project(':payment-service')
     }
 }
 

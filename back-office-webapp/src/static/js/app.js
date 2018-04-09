@@ -20,7 +20,7 @@ angular.module('app', [
     'ncy-angular-breadcrumb',
     'angular-loading-bar',
     'ngDialog',
-    'angularFileUpload'
+    'ngFileUpload'
 ]).config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
     cfpLoadingBarProvider.includeSpinner = false;
     cfpLoadingBarProvider.latencyThreshold = 1;

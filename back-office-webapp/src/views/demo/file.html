@@ -8,11 +8,23 @@
                 </div>
                 <div class="card-body">
                     <div class="form-group">
-                        <label class="col-md-2 control-label">Banner(1440Wx1024H)</label>
-                        <button type="button" class="btn btn-sm btn-primary" ng-file-select
-                                ng-file-change="upload($files)">
+                        <label class="col-md-2 control-label">Image (max size 1MB)</label>
+                        <button type="file" class="btn btn-sm btn-primary" ngf-select="upload($file, $invalidFile)"
+                                accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
                             <i class="fa fa-upload fa-lg "> select..</i>
                         </button>
+                    </div>
+                    <div>{{targetFile.name}}
+                        <span class="progress" ng-show="targetFile.progress >= 0">
+                          <div style="width:{{targetFile.progress}}%"
+                               ng-bind="targetFile.progress + '%'"></div>
+                      </span>
+                    </div>
+                    <div>{{errorFile.name}}
+                        <span>
+                            {{errorFile.$error}} {{errorFile.$errorParam}}
+                        </span>
+                        {{errorMsg}}
                     </div>
                     <div>
                         <label>image key: {{imageKey}}</label>
