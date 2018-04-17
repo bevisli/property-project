@@ -5,6 +5,7 @@ import app.bo.spreedsheet.SpreadsheetColumn;
 import app.bo.spreedsheet.SpreadsheetDataType;
 import app.bo.spreedsheet.SpreadsheetDateTime;
 import app.bo.spreedsheet.SpreadsheetNumber;
+import core.framework.util.Strings;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -25,9 +26,11 @@ public class CSV {
         for (int i = 0; i < fields.length; i++) {
             SpreadsheetColumn columnTag = fields[i].getAnnotation(SpreadsheetColumn.class);
             if (columnTag != null) {
-                String csvValue = trim(values[i], '\"');
-                Object value = parse(fields[i], csvValue, columnTag);
-                set(fields[i], value, instance);
+                if (i < values.length && !Strings.isEmpty(values[i])) {
+                    String csvValue = trim(values[i], '\"');
+                    Object value = parse(fields[i], csvValue, columnTag);
+                    set(fields[i], value, instance);
+                }
             }
         }
         return instance;

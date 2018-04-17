@@ -7,10 +7,10 @@
     "doubleValue": 7777.777,
     "doubleFormatValue": 8888.888,
     "stringValue": "caine",
+    "emptyString": "",
+    "nullInMiddle": null,
     "localDateTimeValue": "2018-04-17T16:01:20",
     "localDateTimeFormatValue": "2018-04-17T16:01",
-    "nullValue": null
-  },
-  {},
-  {}
+    "nullInEnd": null
+  }
 ]

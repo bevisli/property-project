@@ -41,8 +41,8 @@ public class Record {
     @SpreadsheetColumn(name = "empty string")
     public String emptyString;
 
-    @SpreadsheetColumn(name = "null value")
-    public LocalDateTime nullValue;
+    @SpreadsheetColumn(name = "null in middle")
+    public LocalDateTime nullInMiddle;
 
     @SpreadsheetColumn(name = "local date time value", dataType = SpreadsheetDataType.DATE_TIME)
     public LocalDateTime localDateTimeValue;
@@ -50,6 +50,9 @@ public class Record {
     @SpreadsheetDateTime(format = "yyyy-MM-dd HH:mm")
     @SpreadsheetColumn(name = "local date time format value", dataType = SpreadsheetDataType.DATE_TIME)
     public LocalDateTime localDateTimeFormatValue;
+
+    @SpreadsheetColumn(name = "null in end")
+    public LocalDateTime nullInEnd;
 
     public String hiddenValue;
 }
