@@ -1,0 +1,16 @@
+[
+  {
+    "booleanValue": true,
+    "booleanFormatValue": true,
+    "integerValue": 5555,
+    "integerFormatValue": 6666,
+    "doubleValue": 7777.777,
+    "doubleFormatValue": 8888.888,
+    "stringValue": "caine",
+    "localDateTimeValue": "2018-04-17T16:01:20",
+    "localDateTimeFormatValue": "2018-04-17T16:01",
+    "nullValue": null
+  },
+  {},
+  {}
+]

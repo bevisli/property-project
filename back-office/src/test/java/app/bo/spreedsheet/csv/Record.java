@@ -38,6 +38,12 @@ public class Record {
     @SpreadsheetColumn(name = "string value")
     public String stringValue;
 
+    @SpreadsheetColumn(name = "empty string")
+    public String emptyString;
+
+    @SpreadsheetColumn(name = "null value")
+    public LocalDateTime nullValue;
+
     @SpreadsheetColumn(name = "local date time value", dataType = SpreadsheetDataType.DATE_TIME)
     public LocalDateTime localDateTimeValue;
 

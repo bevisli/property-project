@@ -13,7 +13,6 @@ public class CSVReaderTest {
 
     @Test
     public void read() {
-//        ClasspathResources.text()
         List<Record> records = reader.read(Record.class, "D:\\Project\\nan\\prototype-project\\back-office\\src\\test\\resources\\record.csv");
         Assertions.assertEquals(1, records.size());
     }
