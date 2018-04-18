@@ -22,7 +22,9 @@ public class CSVWriter {
             throw new RuntimeException("missing @SpreadsheetTable annotation");
         }
         List<String> lines = Lists.newArrayList();
-        lines.add(header(instanceType));
+        if (tableTag.firstRowIsHeader()) {
+            lines.add(header(instanceType));
+        }
         lines.addAll(instances.stream().map(CSV::toCSV).collect(Collectors.toList()));
         writeAll(lines, fileName);
     }
