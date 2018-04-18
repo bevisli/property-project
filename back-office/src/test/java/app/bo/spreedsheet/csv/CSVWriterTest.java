@@ -15,7 +15,7 @@ public class CSVWriterTest {
 
     @Test
     public void write() {
-        List<Record> records = JSON.fromJSON(Types.list(Record.class), ClasspathResources.text("spreadsheet/records.json"));
+        List<Record> records = JSON.fromJSON(Types.list(Record.class), ClasspathResources.text("spreadsheet/record.json"));
         writer.write(records, "D:\\record.csv");
     }
 }

@@ -25,9 +25,9 @@ public class CSV {
         Field[] fields = instanceType.getFields();
         for (int i = 0; i < fields.length; i++) {
             SpreadsheetColumn columnTag = fields[i].getAnnotation(SpreadsheetColumn.class);
-            if (columnTag != null) {
-                if (i < values.length && !Strings.isEmpty(values[i])) {
-                    String csvValue = trim(values[i], '\"');
+            if (columnTag != null && i < values.length && !Strings.isEmpty(values[i])) {
+                String csvValue = trim(values[i], '\"');
+                if (csvValue.length() > 0) {
                     Object value = parse(fields[i], csvValue, columnTag);
                     set(fields[i], value, instance);
                 }

@@ -14,6 +14,6 @@ public class CSVReaderTest {
     @Test
     public void read() {
         List<Record> records = reader.read(Record.class, "D:\\Project\\nan\\prototype-project\\back-office\\src\\test\\resources\\spreadsheet\\record.csv");
-        Assertions.assertEquals(1, records.size());
+        Assertions.assertEquals(2, records.size());
     }
 }
