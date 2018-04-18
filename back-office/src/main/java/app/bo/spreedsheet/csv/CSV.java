@@ -103,7 +103,7 @@ public class CSV {
                 }
             }
         }
-        return sb.toString();
+        return sb.substring(0, sb.length() - 1);
     }
 
     private static <T> Object getValue(Field field, T instance) {

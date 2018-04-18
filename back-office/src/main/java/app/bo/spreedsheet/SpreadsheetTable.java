@@ -11,9 +11,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SpreadsheetTable {
-    String name();
-
-    int firstDataRowIndex() default 0;
-
-    int firstDataColumnIndex() default 0;
+    boolean firstRowIsHeader();
 }

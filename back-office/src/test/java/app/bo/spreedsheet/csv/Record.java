@@ -12,12 +12,12 @@ import java.time.LocalDateTime;
 /**
  * @author caine
  */
-@SpreadsheetTable(name = "Test Record")
+@SpreadsheetTable(firstRowIsHeader = true)
 public class Record {
     @SpreadsheetColumn(name = "boolean value", dataType = SpreadsheetDataType.BOOLEAN)
     public Boolean booleanValue;
 
-    @SpreadsheetBoolean(trueValue = "Yes", falseValue = "No")
+    @SpreadsheetBoolean(trueValue = "YES", falseValue = "NO")
     @SpreadsheetColumn(name = "boolean format value", dataType = SpreadsheetDataType.BOOLEAN)
     public Boolean booleanFormatValue;
 
