@@ -2,14 +2,12 @@ package app.bo.spreedsheet.csv;
 
 import core.framework.json.JSON;
 import core.framework.util.ClasspathResources;
+import core.framework.util.Lists;
 import core.framework.util.Types;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -26,8 +24,8 @@ public class CSVTest {
 
     @Test
     public void fromCSV() throws IOException {
-        Path path = Paths.get(".\\src\\test\\resources\\spreadsheet\\record.csv");
-        List<String> lines = Files.readAllLines(path);
+        String text = ClasspathResources.text("spreadsheet/record.csv");
+        List<String> lines = Lists.newArrayList(text.split("\n"));
         assertNormal(lines.get(1));
         assertSpecific(lines.get(2));
     }

@@ -2,9 +2,11 @@ package app.bo.spreedsheet.csv;
 
 import core.framework.json.JSON;
 import core.framework.util.ClasspathResources;
+import core.framework.util.Files;
 import core.framework.util.Types;
 import org.junit.jupiter.api.Test;
 
+import java.nio.file.Path;
 import java.util.List;
 
 /**
@@ -16,6 +18,8 @@ public class CSVWriterTest {
     @Test
     public void write() {
         List<Record> records = JSON.fromJSON(Types.list(Record.class), ClasspathResources.text("spreadsheet/record.json"));
-        writer.write(records, "D:\\record.csv");
+        Path tempFile = Files.tempFile();
+        writer.write(records, tempFile.toFile().getAbsolutePath());
+        System.out.println(tempFile.toFile().getAbsolutePath());
     }
 }
