@@ -43,14 +43,16 @@ public class CSVWriter {
 
     private void writeAll(List<String> lines, String fileName) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, false))) {
-            lines.forEach(line -> {
-                try {
-                    writer.write(line);
-                    writer.newLine();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            });
+            lines.forEach(line -> writeLine(line, writer));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void writeLine(String line, BufferedWriter writer) {
+        try {
+            writer.write(line);
+            writer.newLine();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
