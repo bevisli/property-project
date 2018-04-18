@@ -28,7 +28,31 @@ public class CSVTest {
     public void fromCSV() throws IOException {
         Path path = Paths.get(".\\src\\test\\resources\\spreadsheet\\record.csv");
         List<String> lines = Files.readAllLines(path);
-        Record record = CSV.fromCSV(Record.class, lines.get(2));
+        assertNormal(lines.get(1));
+        assertSpecific(lines.get(2));
+    }
+
+    private void assertNormal(String line) {
+        Record record = CSV.fromCSV(Record.class, line);
+        Assertions.assertTrue(record.booleanValue);
+        Assertions.assertTrue(record.booleanFormatValue);
+        Assertions.assertEquals(555, record.integerValue, 1);
+        Assertions.assertEquals(666, record.integerFormatValue, 1);
+        Assertions.assertEquals(777.777, record.doubleValue, 0.000001);
+        Assertions.assertEquals(888.9, record.doubleFormatValue, 0.000001);
+        Assertions.assertEquals("normal", record.stringValue);
+        Assertions.assertNull(record.emptyString);
+        Assertions.assertNull(record.nullInMiddle);
+        LocalDateTime dateTime1 = LocalDateTime.of(2018, 4, 17, 16, 1, 20);
+        Assertions.assertEquals(dateTime1, record.localDateTimeValue);
+        LocalDateTime dateTime2 = LocalDateTime.of(2018, 4, 17, 16, 1);
+        Assertions.assertEquals(dateTime2, record.localDateTimeFormatValue);
+        Assertions.assertNull(record.nullInEnd);
+        Assertions.assertNull(record.hiddenValue);
+    }
+
+    private void assertSpecific(String line) {
+        Record record = CSV.fromCSV(Record.class, line);
         Assertions.assertFalse(record.booleanValue);
         Assertions.assertFalse(record.booleanFormatValue);
         Assertions.assertEquals(5555, record.integerValue, 1);
