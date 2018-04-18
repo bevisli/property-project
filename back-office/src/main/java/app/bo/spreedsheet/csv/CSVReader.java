@@ -4,6 +4,7 @@ import app.bo.spreedsheet.SpreadsheetTable;
 import core.framework.util.Lists;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
@@ -14,20 +15,24 @@ import java.util.stream.Collectors;
  */
 public class CSVReader {
     public <T> List<T> read(Class<T> instanceType, String fileName) {
+        return read(instanceType, new File(fileName));
+    }
+
+    public <T> List<T> read(Class<T> instanceType, File file) {
         SpreadsheetTable tableTag = instanceType.getAnnotation(SpreadsheetTable.class);
         if (tableTag == null) {
             throw new RuntimeException("missing @SpreadsheetTable annotation");
         }
-        List<String> lines = readAll(fileName);
+        List<String> lines = readAll(file);
         if (tableTag.firstRowIsHeader()) {
             lines.remove(0);
         }
         return lines.stream().map(line -> CSV.fromCSV(instanceType, line)).collect(Collectors.toList());
     }
 
-    public List<String> readAll(String fileName) {
+    public List<String> readAll(File file) {
         List<String> lines = Lists.newArrayList();
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             do {
                 line = reader.readLine();

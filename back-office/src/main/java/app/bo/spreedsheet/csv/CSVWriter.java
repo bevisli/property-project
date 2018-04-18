@@ -5,6 +5,7 @@ import app.bo.spreedsheet.SpreadsheetTable;
 import core.framework.util.Lists;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -16,6 +17,10 @@ import java.util.stream.Collectors;
  */
 public class CSVWriter {
     public <T> void write(List<T> instances, String fileName) {
+        write(instances, new File(fileName));
+    }
+
+    public <T> void write(List<T> instances, File file) {
         Class<?> instanceType = instances.get(0).getClass();
         SpreadsheetTable tableTag = instanceType.getAnnotation(SpreadsheetTable.class);
         if (tableTag == null) {
@@ -26,7 +31,7 @@ public class CSVWriter {
             lines.add(header(instanceType));
         }
         lines.addAll(instances.stream().map(CSV::toCSV).collect(Collectors.toList()));
-        writeAll(lines, fileName);
+        writeAll(lines, file);
     }
 
     private String header(Class<?> instanceType) {
@@ -41,8 +46,8 @@ public class CSVWriter {
         return sb.substring(0, sb.length() - 1);
     }
 
-    private void writeAll(List<String> lines, String fileName) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, false))) {
+    private void writeAll(List<String> lines, File file) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, false))) {
             lines.forEach(line -> writeLine(line, writer));
         } catch (IOException e) {
             throw new RuntimeException(e);
