@@ -14,12 +14,12 @@ import java.util.stream.Collectors;
  * @author caine
  */
 public class CSVReader {
-    public <T> List<T> read(Class<T> instanceType, String fileName) {
-        return read(instanceType, new File(fileName));
+    public <T> List<T> read(Class<T> objectType, String fileName) {
+        return read(objectType, new File(fileName));
     }
 
-    public <T> List<T> read(Class<T> instanceType, File file) {
-        SpreadsheetTable tableTag = instanceType.getAnnotation(SpreadsheetTable.class);
+    public <T> List<T> read(Class<T> objectType, File file) {
+        SpreadsheetTable tableTag = objectType.getAnnotation(SpreadsheetTable.class);
         if (tableTag == null) {
             throw new RuntimeException("missing @SpreadsheetTable annotation");
         }
@@ -27,7 +27,7 @@ public class CSVReader {
         if (tableTag.firstRowIsHeader()) {
             lines.remove(0);
         }
-        return lines.stream().map(line -> CSV.fromCSV(instanceType, line)).collect(Collectors.toList());
+        return lines.stream().map(line -> CSV.fromCSV(objectType, line)).collect(Collectors.toList());
     }
 
     public List<String> readAll(File file) {

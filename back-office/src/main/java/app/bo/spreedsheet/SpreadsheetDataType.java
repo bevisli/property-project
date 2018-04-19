@@ -5,7 +5,7 @@ package app.bo.spreedsheet;
  */
 public enum SpreadsheetDataType {
     BOOLEAN,
-    INTERGE,
+    INTEGER,
     DOUBLE,
     STRING,
     DATE_TIME,

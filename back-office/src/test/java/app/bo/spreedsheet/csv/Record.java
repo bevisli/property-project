@@ -21,11 +21,11 @@ public class Record {
     @SpreadsheetColumn(name = "boolean format value", dataType = SpreadsheetDataType.BOOLEAN)
     public Boolean booleanFormatValue;
 
-    @SpreadsheetColumn(name = "integer value", dataType = SpreadsheetDataType.INTERGE)
+    @SpreadsheetColumn(name = "integer value", dataType = SpreadsheetDataType.INTEGER)
     public Integer integerValue;
 
     @SpreadsheetNumber(format = "#,###")
-    @SpreadsheetColumn(name = "integer format value", dataType = SpreadsheetDataType.INTERGE)
+    @SpreadsheetColumn(name = "integer format value", dataType = SpreadsheetDataType.INTEGER)
     public Integer integerFormatValue;
 
     @SpreadsheetColumn(name = "double value", dataType = SpreadsheetDataType.DOUBLE)

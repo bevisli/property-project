@@ -19,26 +19,26 @@ import java.time.format.DateTimeFormatterBuilder;
  * @author caine
  */
 public class CSV {
-    public static <T> T fromCSV(Class<T> instanceType, String record) {
-        T instance = instance(instanceType);
-        String[] values = record.split(",");
-        Field[] fields = instanceType.getFields();
+    public static <T> T fromCSV(Class<T> objectType, String csvRow) {
+        T object = newObject(objectType);
+        String[] values = csvRow.split(",");
+        Field[] fields = objectType.getFields();
         for (int i = 0; i < fields.length; i++) {
             SpreadsheetColumn columnTag = fields[i].getAnnotation(SpreadsheetColumn.class);
             if (columnTag != null && i < values.length && !Strings.isEmpty(values[i])) {
                 String csvValue = trim(values[i], '\"');
                 if (csvValue.length() > 0) {
                     Object value = parse(fields[i], csvValue, columnTag);
-                    set(fields[i], value, instance);
+                    set(fields[i], value, object);
                 }
             }
         }
-        return instance;
+        return object;
     }
 
-    private static <T> T instance(Class<T> instanceType) {
+    private static <T> T newObject(Class<T> objectType) {
         try {
-            return instanceType.getDeclaredConstructor().newInstance();
+            return objectType.getDeclaredConstructor().newInstance();
         } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException | InstantiationException e) {
             throw new RuntimeException(e);
         }
@@ -63,7 +63,7 @@ public class CSV {
             } else {
                 return Boolean.valueOf(csvValue);
             }
-        } else if (columnTag.dataType() == SpreadsheetDataType.INTERGE) {
+        } else if (columnTag.dataType() == SpreadsheetDataType.INTEGER) {
             return Integer.valueOf(csvValue);
         } else if (columnTag.dataType() == SpreadsheetDataType.DOUBLE) {
             return Double.valueOf(csvValue);
@@ -80,24 +80,24 @@ public class CSV {
         }
     }
 
-    private static <T> void set(Field field, Object value, T instance) {
+    private static <T> void set(Field field, Object value, T object) {
         try {
-            field.set(instance, value);
+            field.set(object, value);
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static <T> String toCSV(T instance) {
+    public static <T> String toCSV(T object) {
         StringBuilder sb = new StringBuilder();
-        Field[] fields = instance.getClass().getFields();
+        Field[] fields = object.getClass().getFields();
         for (Field field : fields) {
             SpreadsheetColumn columnTag = field.getAnnotation(SpreadsheetColumn.class);
             if (columnTag != null) {
-                Object value = getValue(field, instance);
+                Object value = getValue(field, object);
                 if (value != null) {
-                    String csv = format(columnTag, field, value);
-                    sb.append('"').append(csv).append("\",");
+                    String csvValue = format(columnTag, field, value);
+                    sb.append('"').append(csvValue).append("\",");
                 } else {
                     sb.append("\"\",");
                 }
@@ -106,9 +106,9 @@ public class CSV {
         return sb.substring(0, sb.length() - 1);
     }
 
-    private static <T> Object getValue(Field field, T instance) {
+    private static <T> Object getValue(Field field, T object) {
         try {
-            return field.get(instance);
+            return field.get(object);
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         }
@@ -122,7 +122,7 @@ public class CSV {
                 return Boolean.TRUE.equals(bool) ? boolTag.trueValue() : boolTag.falseValue();
             }
         }
-        if (columnTag.dataType() == SpreadsheetDataType.INTERGE || columnTag.dataType() == SpreadsheetDataType.DOUBLE) {
+        if (columnTag.dataType() == SpreadsheetDataType.INTEGER || columnTag.dataType() == SpreadsheetDataType.DOUBLE) {
             SpreadsheetNumber numberTag = field.getAnnotation(SpreadsheetNumber.class);
             if (numberTag != null) {
                 BigDecimal decimal = new BigDecimal(value.toString());
