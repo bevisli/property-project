@@ -3,4 +3,5 @@ include 'ali-cloud-service',
         'payment-service',
         'payment-service-db-migration',
         'back-office-db-migration',
-        'back-office'
+        'back-office',
+        'core-util'

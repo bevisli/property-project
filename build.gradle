@@ -40,6 +40,7 @@ configure(subprojects.findAll { it.name.matches('.*-service-interface') }) {
 
 // coreng
 configure([project(':payment-service'),
+           project(':core-util'),
            project(':back-office'),
            project(':ali-cloud-service')]) {
     apply from: file("${rootDir}/gradle/app.gradle")
@@ -78,6 +79,10 @@ configure([project(':payment-service'),
     dependencies {
         runtime "org.apache.kafka:kafka-clients:${kafkaVersion}"
     }
+}
+
+project(':core-util') {
+    apply from: file("${rootDir}/gradle/lib.gradle")
 }
 
 project(':payment-service') {
